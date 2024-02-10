@@ -1,0 +1,2 @@
+class RealtiesFacility < ApplicationRecord
+end

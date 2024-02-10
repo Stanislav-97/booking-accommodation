@@ -1,0 +1,2 @@
+class RealtiesPhoto < ApplicationRecord
+end

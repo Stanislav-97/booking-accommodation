@@ -1,0 +1,2 @@
+class UsersRealty < ApplicationRecord
+end
