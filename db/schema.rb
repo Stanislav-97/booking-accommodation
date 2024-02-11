@@ -10,8 +10,100 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 0) do
+ActiveRecord::Schema[7.1].define(version: 2024_02_10_114403) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "bookings", force: :cascade do |t|
+    t.bigint "realty_id", null: false
+    t.date "date_from", null: false
+    t.date "date_to", null: false
+    t.float "amount", null: false
+    t.float "paid_amount", null: false
+    t.string "fio", null: false
+    t.string "phone", null: false
+    t.string "email", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["realty_id"], name: "index_bookings_on_realty_id"
+  end
+
+  create_table "facilities", force: :cascade do |t|
+    t.string "name", null: false
+    t.string "icon", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "organizations", force: :cascade do |t|
+    t.string "name", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "prices", force: :cascade do |t|
+    t.float "amount", null: false
+    t.date "date", null: false
+    t.bigint "realty_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["realty_id"], name: "index_prices_on_realty_id"
+  end
+
+  create_table "realties", force: :cascade do |t|
+    t.bigint "organization_id", null: false
+    t.integer "building_year", null: false
+    t.integer "floor", null: false
+    t.text "description", null: false
+    t.integer "area", null: false
+    t.integer "entrance"
+    t.integer "rooms_count", null: false
+    t.string "realty_type", null: false
+    t.float "base_price", null: false
+    t.float "lon", null: false
+    t.float "lat", null: false
+    t.string "address", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["organization_id"], name: "index_realties_on_organization_id"
+  end
+
+  create_table "realties_facilities", force: :cascade do |t|
+    t.bigint "realty_id", null: false
+    t.bigint "facility_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["facility_id"], name: "index_realties_facilities_on_facility_id"
+    t.index ["realty_id"], name: "index_realties_facilities_on_realty_id"
+  end
+
+  create_table "realties_photos", force: :cascade do |t|
+    t.bigint "realty_id", null: false
+    t.string "photo", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["realty_id"], name: "index_realties_photos_on_realty_id"
+  end
+
+  create_table "users", force: :cascade do |t|
+    t.bigint "organization_id", null: false
+    t.string "first_name", null: false
+    t.string "last_name", null: false
+    t.boolean "organization_admin", null: false
+    t.string "email"
+    t.string "phone", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["organization_id"], name: "index_users_on_organization_id"
+  end
+
+  create_table "users_realties", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "realty_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["realty_id"], name: "index_users_realties_on_realty_id"
+    t.index ["user_id"], name: "index_users_realties_on_user_id"
+  end
 
 end
