@@ -14,12 +14,8 @@ ActiveRecord::Schema[7.1].define(version: 2024_02_10_114403) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  # Custom types defined in this database.
-  # Note that some types may not work with other database engines. Be careful if changing database.
-  create_enum "status", ["apartment", "house", "country_house", "cottage"]
-
   create_table "bookings", force: :cascade do |t|
-    t.integer "realty_id", null: false
+    t.bigint "realty_id", null: false
     t.date "date_from", null: false
     t.date "date_to", null: false
     t.float "amount", null: false
@@ -48,21 +44,21 @@ ActiveRecord::Schema[7.1].define(version: 2024_02_10_114403) do
   create_table "prices", force: :cascade do |t|
     t.float "amount", null: false
     t.date "date", null: false
-    t.integer "realty_id", null: false
+    t.bigint "realty_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["realty_id"], name: "index_prices_on_realty_id"
   end
 
   create_table "realties", force: :cascade do |t|
-    t.integer "organization_id", null: false
+    t.bigint "organization_id", null: false
     t.integer "building_year", null: false
     t.integer "floor", null: false
     t.text "description", null: false
     t.integer "area", null: false
     t.integer "entrance"
     t.integer "rooms_count", null: false
-    t.enum "realty_type", default: "apartment", null: false, enum_type: "status"
+    t.string "realty_type", null: false
     t.float "base_price", null: false
     t.float "lon", null: false
     t.float "lat", null: false
@@ -73,8 +69,8 @@ ActiveRecord::Schema[7.1].define(version: 2024_02_10_114403) do
   end
 
   create_table "realties_facilities", force: :cascade do |t|
-    t.integer "realty_id", null: false
-    t.integer "facility_id", null: false
+    t.bigint "realty_id", null: false
+    t.bigint "facility_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["facility_id"], name: "index_realties_facilities_on_facility_id"
@@ -82,15 +78,15 @@ ActiveRecord::Schema[7.1].define(version: 2024_02_10_114403) do
   end
 
   create_table "realties_photos", force: :cascade do |t|
-    t.integer "realty_id", null: false
-    t.binary "photo", null: false
+    t.bigint "realty_id", null: false
+    t.string "photo", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["realty_id"], name: "index_realties_photos_on_realty_id"
   end
 
   create_table "users", force: :cascade do |t|
-    t.integer "organization_id", null: false
+    t.bigint "organization_id", null: false
     t.string "first_name", null: false
     t.string "last_name", null: false
     t.boolean "organization_admin", null: false
@@ -102,8 +98,8 @@ ActiveRecord::Schema[7.1].define(version: 2024_02_10_114403) do
   end
 
   create_table "users_realties", force: :cascade do |t|
-    t.integer "user_id", null: false
-    t.integer "realty_id", null: false
+    t.bigint "user_id", null: false
+    t.bigint "realty_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["realty_id"], name: "index_users_realties_on_realty_id"

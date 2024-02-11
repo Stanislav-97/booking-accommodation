@@ -1,7 +1,7 @@
 class CreateBookings < ActiveRecord::Migration[7.1]
   def change
     create_table :bookings do |t|
-      t.integer :realty_id, null: false, index: true
+      t.references :realty, null: false, index: true
 	    t.date :date_from, null: false
 	    t.date :date_to, null: false
 	    t.float :amount, null: false

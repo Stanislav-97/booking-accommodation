@@ -3,7 +3,7 @@ class CreatePrices < ActiveRecord::Migration[7.1]
     create_table :prices do |t|
       t.float :amount, null: false
 	    t.date :date, null: false
-	    t.integer :realty_id, null: false, index: true
+	    t.references :realty, null: false, index: true
 
       t.timestamps
     end
