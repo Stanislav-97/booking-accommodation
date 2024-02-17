@@ -105,5 +105,5 @@ ActiveRecord::Schema[7.1].define(version: 2024_02_10_114403) do
     t.index ["realty_id"], name: "index_users_realties_on_realty_id"
     t.index ["user_id"], name: "index_users_realties_on_user_id"
   end
-
+  
 end

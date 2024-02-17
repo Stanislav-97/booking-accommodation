@@ -19,6 +19,8 @@ gem 'puma', '>= 5.0'
 # Build JSON APIs with ease [https://github.com/rails/jbuilder]
 gem 'jbuilder'
 
+gem 'blueprinter'
+
 gem 'rubocop-performance'
 
 # Use Redis adapter to run Action Cable in production
