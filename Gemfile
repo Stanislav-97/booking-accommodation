@@ -1,25 +1,27 @@
-source 'https://rubygems.org'
+source "https://rubygems.org"
 
-ruby '3.2.2'
+ruby "3.2.2"
 
 # Bundle edge Rails instead: gem "rails", github: "rails/rails", branch: "main"
-gem 'rails', '~> 7.1.2'
+gem "rails", "~> 7.1.2"
 
-gem 'pry-rails'
+gem "pry-rails"
 
-gem 'faker'
+gem "faker"
 
-gem 'rubocop-rails'
+gem "rubocop-rails"
 
-gem 'pg'
+gem "pg"
 
 # Use the Puma web server [https://github.com/puma/puma]
-gem 'puma', '>= 5.0'
+gem "puma", ">= 5.0"
 
 # Build JSON APIs with ease [https://github.com/rails/jbuilder]
-gem 'jbuilder'
+gem "jbuilder"
 
-gem 'rubocop-performance'
+gem "blueprinter"
+
+gem "rubocop-performance"
 
 # Use Redis adapter to run Action Cable in production
 # gem "redis", ">= 4.0.1"
@@ -31,24 +33,24 @@ gem 'rubocop-performance'
 # gem "bcrypt", "~> 3.1.7"
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
-gem 'tzinfo-data', platforms: %i[windows jruby]
+gem "tzinfo-data", platforms: %i[windows jruby]
 
 # Reduces boot times through caching; required in config/boot.rb
-gem 'bootsnap', require: false
+gem "bootsnap", require: false
 
 # Use Active Storage variants [https://guides.rubyonrails.org/active_storage_overview.html#transforming-images]
 # gem "image_processing", "~> 1.2"
 
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
-  gem 'debug', platforms: %i[mri windows]
-  gem 'factory_bot_rails'
-  gem 'rspec-rails'
+  gem "debug", platforms: %i[mri windows]
+  gem "factory_bot_rails"
+  gem "rspec-rails"
 end
 
 group :development do
   # Use console on exceptions pages [https://github.com/rails/web-console]
-  gem 'web-console'
+  gem "web-console"
 
   # Add speed badges [https://github.com/MiniProfiler/rack-mini-profiler]
   # gem "rack-mini-profiler"
@@ -59,8 +61,8 @@ end
 
 group :test do
   # Use system testing [https://guides.rubyonrails.org/testing.html#system-testing]
-  gem 'capybara'
-  gem 'database_cleaner-active_record'
-  gem 'selenium-webdriver'
-  gem 'shoulda-matchers'
+  gem "capybara"
+  gem "database_cleaner-active_record"
+  gem "selenium-webdriver"
+  gem "shoulda-matchers"
 end
