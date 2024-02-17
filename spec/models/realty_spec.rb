@@ -1,9 +1,9 @@
-require 'rails_helper'
+require "rails_helper"
 
 RSpec.describe Realty, type: :model do
   subject(:instance) { build(:realty) }
 
-  describe 'relations' do
+  describe "relations" do
     it { is_expected.to belong_to(:organization) }
     it { is_expected.to have_many(:prices) }
     it { is_expected.to have_many(:bookings) }
@@ -15,7 +15,7 @@ RSpec.describe Realty, type: :model do
     it { is_expected.to have_many(:users).through(:users_realties) }
   end
 
-  describe 'validations' do
+  describe "validations" do
     it { is_expected.to validate_presence_of(:address) }
     it { is_expected.to validate_presence_of(:lat) }
     it { is_expected.to validate_presence_of(:lon) }
@@ -29,4 +29,3 @@ RSpec.describe Realty, type: :model do
     it { is_expected.to validate_comparison_of(:entrance).is_greater_than(0) }
   end
 end
-

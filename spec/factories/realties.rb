@@ -10,7 +10,7 @@ FactoryBot.define do
     entrance { Faker::Number.between(from: 1, to: 3) }
     realty_type { "flat" }
 
-    base_price { Faker::Number.between(from: 2000, to: 10000) }
+    base_price { Faker::Number.between(from: 2000, to: 10_000) }
     lon { Faker::Address.longitude }
     lat { Faker::Address.latitude }
     address { Faker::Address.street_address }
