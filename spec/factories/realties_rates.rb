@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 
 FactoryBot.define do
-  factory :realties_facility do
+  factory :realties_rate do
     realty
-    facility
+    rate
   end
 end

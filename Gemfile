@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 source "https://rubygems.org"
 
 ruby "3.2.2"
@@ -17,9 +19,10 @@ gem "pg"
 gem "puma", ">= 5.0"
 
 # Build JSON APIs with ease [https://github.com/rails/jbuilder]
-gem "jbuilder"
 
 gem "blueprinter"
+
+gem "oj"
 
 gem "rubocop-performance"
 

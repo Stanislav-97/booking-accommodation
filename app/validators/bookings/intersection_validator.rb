@@ -1,18 +1,22 @@
-class Bookings::IntersectionValidator < ActiveModel::Validator
-  def validate(record)
-    return unless intersection?(record)
+# frozen_string_literal: true
 
-    record.errors.add("Даты уже забронированы")
-  end
+module Bookings
+  class IntersectionValidator < ActiveModel::Validator
+    def validate(record)
+      return unless intersection?(record)
 
-  private
+      record.errors.add("Даты уже забронированы")
+    end
 
-  def intersection?(record)
-    realty = record.realty
-    return false if realty.blank?
+    private
 
-    booking_range = record.date_from..record.date_to
-    bookings = realty.bookings
-    bookings.where(date_from: booking_range).or(bookings.where(date_to: booking_range)).exists?
+    def intersection?(record)
+      realty = record.realty
+      return false if realty.blank?
+
+      booking_range = record.date_from..record.date_to
+      bookings = realty.bookings
+      bookings.where(date_from: booking_range).or(bookings.where(date_to: booking_range)).exists?
+    end
   end
 end

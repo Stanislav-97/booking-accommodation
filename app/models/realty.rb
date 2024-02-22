@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Realty < ApplicationRecord
   REALTY_TYPES = %w[
     flat
@@ -15,6 +17,8 @@ class Realty < ApplicationRecord
   has_many :users, through: :users_realties
   has_many :realties_facilities
   has_many :facilities, through: :realties_facilities
+  has_many :realties_rates
+  has_many :rates, through: :realties_rates
   has_many :prices
   has_many :bookings
 
