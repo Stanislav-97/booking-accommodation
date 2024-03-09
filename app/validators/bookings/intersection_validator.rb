@@ -1,18 +1,20 @@
-class Bookings::IntersectionValidator < ActiveModel::Validator
-  def validate(record)
-    return unless intersection?(record)
+module Bookings
+  class IntersectionValidator < ActiveModel::Validator
+    def validate(record)
+      return unless intersection?(record)
 
-    record.errors.add("Даты уже забронированы")
-  end
+      record.errors.add("Даты уже забронированы")
+    end
 
-  private
+    private
 
-  def intersection?(record)
-    realty = record.realty
-    return false if realty.blank?
+    def intersection?(record)
+      realty = record.realty
+      return false if realty.blank?
 
-    booking_range = record.date_from..record.date_to
-    bookings = realty.bookings
-    bookings.where(date_from: booking_range).or(bookings.where(date_to: booking_range)).exists?
+      booking_range = record.date_from..record.date_to
+      bookings = realty.bookings
+      bookings.where(date_from: booking_range).or(bookings.where(date_to: booking_range)).exists?
+    end
   end
 end
