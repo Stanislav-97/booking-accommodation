@@ -69,3 +69,5 @@ group :test do
   gem "selenium-webdriver"
   gem "shoulda-matchers"
 end
+
+gem "pundit", "~> 2.3"
