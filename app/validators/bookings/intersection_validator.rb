@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 module Bookings
   class IntersectionValidator < ActiveModel::Validator
     def validate(record)

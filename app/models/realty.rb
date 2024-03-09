@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 class Realty < ApplicationRecord
   REALTY_TYPES = %w[
     flat
