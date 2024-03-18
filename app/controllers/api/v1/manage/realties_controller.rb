@@ -1,42 +1,40 @@
-class RealtiesController < ApplicationController
+class Api::V1::Manage::RealtiesController < ApplicationController
+  #TODO:добавить полиси. 
+  #Тесты контроллеров
+  before_action :realties, only: [:show, :create, :update, :destroy]
 
   def index
-    @realties = current_user.realties
-    #render json: RealtyBlueprint.render(@realties)
+    render json: { data: RealtyBlueprint.render(realties) }
   end
 
   def show
-    @realty = Realty.find(params[:id])
+    realty = realties.find(params[:id])
+    render json: { data: RealtyBlueprint.render(realty) }
   end
 
   def create
-    @realty = current_user.realties.new(realty_params)
-    if @realty.save
-      redirect_to realties_path
-    else
-      render :show
-    end
+    realty = realties.new(realty_params)
+    render json: { data: RealtyBlueprint.render(realty) }
   end
 
   def update
-    @realty = Realty.find(params[:id])
-
-    if @realty.update(realty_params)
-      redirect_to @realty
-    else
-      render :show
-    end
+    ealty = realties.find(params[:id])
+    render json: { data: RealtyBlueprint.render(realty) }
   end
 
   def destroy
-    @realty = Realty.find(params[:id])
-    @realty.destroy
+    realty = realties.find(params[:id])
+    realty.destroy
 
-    redirect_to root_path
+    render json: { data: RealtyBlueprint.render(realties) }
   end
 
-
   private
+
+  def realties
+    @realties ||= current_user.realties
+    authorize @realties
+  end
 
   def realty_params
     params.require(:realty).permit(

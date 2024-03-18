@@ -2,7 +2,11 @@
 
 Rails.application.routes.draw do
   namespace :api do
-    resources :realties, only: %i[index show create update destroy]
+    namespace :v1 do
+      namespace :manage do
+        resources :realties, only: %i[index show create update destroy]
+      end
+    end
   end
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
