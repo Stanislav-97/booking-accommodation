@@ -1,12 +1,6 @@
 require "rails_helper"
 
-RSpec.describe RealtiesController, type: :controller do
-
-  controller do
-    def index
-      render :json => {}, :status => 209
-    end
-  end
+RSpec.describe Api::V1::Manage::RealtiesController, type: :controller do
 
   describe "GET #index" do
     it "returns a 209 custom status code" do
