@@ -14,11 +14,11 @@ class RealtyPolicy < ApplicationPolicy
   end
 
   def update?
-    user.organization_admin? || user.realty_ids.include?(record.id)
+    user.organization_admin?
   end
 
   def destroy?
-    user.organization_admin? || user.realty_ids.include?(record.id)
+    user.organization_admin?
   end
 
   def index?
