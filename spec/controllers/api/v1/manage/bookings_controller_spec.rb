@@ -1,6 +1,6 @@
 require "rails_helper"
 
-RSpec.describe Api::V1::Manage::RealtiesController, type: :controller do
+RSpec.describe Api::V1::Manage::BookingsController, type: :controller do
   describe "GET #index" do
     it "returns a 209 custom status code" do
       get :index
