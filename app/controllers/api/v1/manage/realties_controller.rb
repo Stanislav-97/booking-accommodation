@@ -11,13 +11,13 @@ class Api::V1::Manage::RealtiesController < ApplicationController
   end
 
   def create
-    realty = realties.create!(realty_params)
-    render json: { data: RealtyBlueprint.render_as_hash(realty) }
+    realties.create!(realty_params)
+    render json: { data: RealtyBlueprint.render_as_hash(realties) }
   end
 
   def update
     realty.update!(realty_params)
-    render json: { data: RealtyBlueprint.render_as_hash(realty) }
+    render json: { data: RealtyBlueprint.render_as_hash(realties) }
   end
 
   def destroy

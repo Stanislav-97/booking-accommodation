@@ -1,6 +1,5 @@
 class Api::V1::Manage::BookingsController < ApplicationController
-  before_action -> { authorize(bookings) }, only: [:index, :create]
-  before_action -> { authorize(booking) }, only: [:update, :destroy]
+  before_action -> { authorize(realty) }
 
   def index
     render json: { data: BookingBlueprint.render_as_hash(bookings) }
@@ -12,7 +11,7 @@ class Api::V1::Manage::BookingsController < ApplicationController
   end
 
   def update
-    booking.update!(Bookings::Updator.new(realty, booking_params).call)
+    Bookings::Updater.new(booking, booking_params).call
     render json: { data: BookingBlueprint.render_as_hash(booking) }
   end
 
@@ -28,11 +27,11 @@ class Api::V1::Manage::BookingsController < ApplicationController
   end
 
   def bookings
-    @bookings ||= policy_scope(Booking)
+    @bookings ||= realty.bookings 
   end
 
   def booking
-    @booking ||= realty.bookings.find(params[:id])
+    @booking ||= bookings.find(params[:id])
   end
 
   def booking_params
