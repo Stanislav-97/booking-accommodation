@@ -1,6 +1,6 @@
 class Api::V1::Manage::RealtiesController < ApplicationController
-  before_action -> { authorize(realties) }, only: [:index, :create]
-  before_action -> { authorize(realty) }, only: [:show, :update, :destroy]
+  before_action -> { authorize(realties) }, only: %i[index create]
+  before_action -> { authorize(realty) }, only: %i[show update destroy]
 
   def index
     render json: { data: RealtyBlueprint.render_as_hash(realties) }
@@ -37,16 +37,17 @@ class Api::V1::Manage::RealtiesController < ApplicationController
 
   def realty_params
     params.require(:realty).permit(
-      :building_year, 
-      :floor, 
-      :description, 
-      :area, 
-      :entrance, 
-      :rooms_count, 
-      :realty_type, 
-      :base_price, 
-      :lon, 
+      :building_year,
+      :floor,
+      :description,
+      :area,
+      :entrance,
+      :rooms_count,
+      :realty_type,
+      :base_price,
+      :lon,
       :lat,
-      :address)
+      :address
+    )
   end
 end

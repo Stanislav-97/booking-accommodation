@@ -11,7 +11,7 @@ module Bookings
     def intersection?(record)
       realty = record.realty
       return false if realty.blank?
-      
+
       booking_range = record.date_from...record.date_to
       bookings = realty.bookings.where.not(id: record.id)
       bookings.where(date_from: booking_range).or(bookings.where(date_to: booking_range)).exists?

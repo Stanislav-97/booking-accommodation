@@ -27,7 +27,7 @@ class Api::V1::Manage::BookingsController < ApplicationController
   end
 
   def bookings
-    @bookings ||= realty.bookings 
+    @bookings ||= realty.bookings
   end
 
   def booking
@@ -36,10 +36,10 @@ class Api::V1::Manage::BookingsController < ApplicationController
 
   def booking_params
     params.require(:booking).permit(
-      :date_from, 
-      :date_to, 
-      :paid_amount, 
-      :fio, 
+      :date_from,
+      :date_to,
+      :paid_amount,
+      :fio,
       :phone,
       :email
     )

@@ -10,7 +10,7 @@ class RealtyPolicy < ApplicationPolicy
   end
 
   def create?
-    user.organization_admin? 
+    user.organization_admin?
   end
 
   def update?
