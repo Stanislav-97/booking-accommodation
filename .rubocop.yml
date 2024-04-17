@@ -13,7 +13,7 @@ Metrics/BlockLength:
     - spec/**/*_spec.rb # nearly all spec files go over 25 lines
 
 Metrics/MethodLength:
-  Max: 1000
+  Max: 20
 
 Style/StringLiterals:
   Enabled: true
