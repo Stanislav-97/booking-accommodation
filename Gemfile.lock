@@ -156,6 +156,8 @@ GEM
       racc (~> 1.4)
     nokogiri (1.16.2-arm64-darwin)
       racc (~> 1.4)
+    nokogiri (1.16.2-x86_64-darwin)
+      racc (~> 1.4)
     nokogiri (1.16.2-x86_64-linux)
       racc (~> 1.4)
     oj (3.16.3)
@@ -179,6 +181,8 @@ GEM
       activesupport (>= 3.0.0)
     racc (1.7.3)
     rack (3.0.9)
+    rack-cors (2.0.1)
+      rack (>= 2.0.0)
     rack-session (2.0.0)
       rack (>= 3.0.0)
     rack-test (2.1.0)
@@ -298,6 +302,7 @@ GEM
 PLATFORMS
   aarch64-linux
   arm64-darwin-22
+  x86_64-darwin-21
   x86_64-linux
 
 DEPENDENCIES
@@ -313,6 +318,7 @@ DEPENDENCIES
   pry-rails
   puma (>= 5.0)
   pundit (~> 2.3)
+  rack-cors
   rails (~> 7.1.2)
   rails-controller-testing
   rspec-rails

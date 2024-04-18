@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 source "https://rubygems.org"
 
 ruby "3.2.2"
@@ -25,6 +23,8 @@ gem "blueprinter"
 gem "oj"
 
 gem "rubocop-performance"
+
+gem "rack-cors"
 
 # Use Redis adapter to run Action Cable in production
 # gem "redis", ">= 4.0.1"
