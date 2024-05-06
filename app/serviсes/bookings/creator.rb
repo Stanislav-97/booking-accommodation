@@ -17,7 +17,7 @@ class Bookings::Creator
     date_to = booking_attrs[:date_to].to_date
 
     prices = (date_from...date_to).map do |date|
-      price = realty.prices.find_by(date:)
+      price = grouped_prices[(date:)]
 
       if price.present?
         price.amount
@@ -28,4 +28,9 @@ class Bookings::Creator
 
     prices.sum
   end
+
+  def grouped_prices
+    @grouped_prices ||= realty.prices.index_by(&:date)
+  end
+
 end

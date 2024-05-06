@@ -6,7 +6,7 @@ class Api::V1::Manage::PricesController < ApplicationController
   end
   
   def update
-    price.update!(price_params)
+    Prices::Updater.new(realty, price_params[:prices]).call
     render json: { data: PriceBlueprint.render_as_hash(prices) }
   end
 
@@ -25,9 +25,6 @@ class Api::V1::Manage::PricesController < ApplicationController
   end
 
   def price_params
-    params.require(:price).permit(
-      :date,
-      :amount
-    )
+    params.permit(prices: %i[date amount])
   end
 end
