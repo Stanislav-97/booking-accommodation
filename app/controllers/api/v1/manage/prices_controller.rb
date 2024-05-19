@@ -4,7 +4,7 @@ class Api::V1::Manage::PricesController < ApplicationController
   def index
     render json: { data: PriceBlueprint.render_as_hash(prices) }
   end
-  
+
   def update
     Prices::Updater.new(realty, price_params[:prices]).call
     render json: { data: PriceBlueprint.render_as_hash(prices) }
