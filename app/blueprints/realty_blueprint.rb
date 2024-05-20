@@ -7,4 +7,8 @@ class RealtyBlueprint < Blueprinter::Base
   view :with_bookings do
     association :bookings, blueprint: BookingBlueprint, default: []
   end
+
+  view :with_prices do
+    association :prices, blueprint: PriceBlueprint, default: []
+  end
 end
