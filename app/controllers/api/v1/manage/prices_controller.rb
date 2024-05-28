@@ -20,10 +20,6 @@ class Api::V1::Manage::PricesController < ApplicationController
     @prices ||= realty.prices
   end
 
-  def price
-    @price ||= prices.find(params[:id])
-  end
-
   def price_params
     params.permit(prices: %i[date amount])
   end

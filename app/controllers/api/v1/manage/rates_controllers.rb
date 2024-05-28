@@ -1,28 +1,25 @@
 class Api::V1::Manage::RatesController < ApplicationController
-  #before_action -> { authorize(realty) }
+  before_action -> { authorize(rates) }, only: %i[index create]
+  before_action -> { authorize(rate) }, only: %i[update]
 
   def index
     render json: { data: RateBlueprint.render_as_hash(rates) }
   end
 
   def create
-    booking = Bookings::Creator.new(realty, booking_params).call
-    render json: { data: BookingBlueprint.render_as_hash(booking) }
+    rates.create!(rate_params)
+    render json: { data: RateBlueprint.render_as_hash(rates) }
   end
 
   def update
-    Bookings::Updater.new(booking, booking_params).call
-    render json: { data: BookingBlueprint.render_as_hash(booking) }
+    rate.update!(rate_params)
+    render json: { data: RateBlueprint.render_as_hash(rates) }
   end
 
   private
 
-  def realty
-    @realty ||= policy_scope(Realty).find(params[:realty_id])
-  end
-
   def rates
-    @rates ||= organization.rates
+    @rates ||= policy_scope(Rate)
   end
 
   def rate
@@ -31,8 +28,7 @@ class Api::V1::Manage::RatesController < ApplicationController
 
   def rate_params
     params.require(:rate).permit(
-      :name, 
-      :date_to, 
+      :name,  
       :extra_change, 
       :extra_change_type
     )
