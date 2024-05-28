@@ -19,7 +19,7 @@ class Api::V1::Manage::RatesController < ApplicationController
   private
 
   def rates
-    @rates ||= policy_scope(Rate)
+    @rates ||= policy(Rate)
   end
 
   def rate
@@ -28,8 +28,8 @@ class Api::V1::Manage::RatesController < ApplicationController
 
   def rate_params
     params.require(:rate).permit(
-      :name,  
-      :extra_change, 
+      :name,
+      :extra_change,
       :extra_change_type
     )
   end

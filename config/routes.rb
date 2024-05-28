@@ -6,11 +6,9 @@ Rails.application.routes.draw do
       namespace :manage do
         resources :realties, only: %i[index show create update destroy] do
           resources :bookings, only: %i[index create update]
-          resources :prices, only: %i[index update] do
-            #смотрел маршруты в rails routes, подумал что тут доллжно быть так, т.е /api/v1/manage/realties/:realty_id/prices(.:format)
-            # и далее должна идти "сдача" от цены
-          resources :rates, only: %i[index create update] 
+          resources :prices, only: %i[index update]
         end
+        resources :rates, only: %i[index create update] 
       end
     end
   end
