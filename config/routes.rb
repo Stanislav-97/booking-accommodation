@@ -6,8 +6,9 @@ Rails.application.routes.draw do
       namespace :manage do
         resources :realties, only: %i[index show create update destroy] do
           resources :bookings, only: %i[index create update]
-          resource :prices, only: %i[show update] 
+          resources :prices, only: %i[index update]
         end
+        resources :rates, only: %i[index create update] 
       end
     end
   end
