@@ -10,7 +10,7 @@ RSpec.describe Rate, type: :model do
 
   describe "validations" do
     it { is_expected.to validate_presence_of(:name) }
-    it { is_expected.to validate_presence_of(:extra_change) }
-    it { is_expected.to validate_presence_of(:extra_change_type) }
+    it { is_expected.to validate_presence_of(:extra_charge) }
+    it { is_expected.to validate_presence_of(:extra_charge_type) }
   end
 end
