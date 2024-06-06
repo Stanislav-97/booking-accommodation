@@ -8,3 +8,16 @@
 #   ["Action", "Comedy", "Drama", "Horror"].each do |genre_name|
 #     MovieGenre.find_or_create_by!(name: genre_name)
 #   end
+[
+  'Холодильник',
+  'Wi-fi',
+  'Парковка',
+  'Стиральная машина',
+  'Утюг',
+  'Фен',
+  'Лифт',
+  'Кондиционер',
+  'ТВ'
+].each do |facility_name|
+  Facility.find_or_create_by(name: facility_name, icon: 'none')
+end

@@ -3,6 +3,7 @@
 Rails.application.routes.draw do
   namespace :api do
     namespace :v1 do
+      resources :realties, only: %i[index show]
       namespace :manage do
         resources :realties, only: %i[index show create update destroy] do
           resources :bookings, only: %i[index create update]
