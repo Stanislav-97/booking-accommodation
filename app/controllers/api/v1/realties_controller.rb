@@ -1,5 +1,4 @@
 class Api::V1::RealtiesController < ApplicationController
-
   def index
     render json: { data: RealtyBlueprint.render_as_hash(realties) }
   end
