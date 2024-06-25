@@ -10,7 +10,7 @@ class Api::V1::RealtiesController < ApplicationController
   private
 
   def realties
-    @realties ||= Realties::Filter.new(realty_params, facilities).call
+    @realties ||= Realties::Filter.new(realty_params).call
   end
 
   def realty
@@ -18,18 +18,13 @@ class Api::V1::RealtiesController < ApplicationController
   end
 
   def realty_params
-    params.require(:realty).permit(
-      :building_year,
-      :floor,
-      :description,
-      :area,
-      :entrance,
+    params.require(:filters).permit(
       :rooms_count,
       :realty_type,
-      :base_price,
-      :lon,
-      :lat,
-      :address
+      building_year: %i[from to],
+      floor: %i[from to],
+      area: %i[from to],
+      facility_ids: []
     )
   end
 end

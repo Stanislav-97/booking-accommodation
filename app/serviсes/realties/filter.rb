@@ -1,24 +1,64 @@
 class Realties::Filter
-  attr_reader :realty_attrs, :facilities
+  attr_reader :realty_params
 
-  def initialize(realty_attrs, facilities)
-    @realty_params = realty_attrs
-    @facilities = Facility.all
+  # {
+  #   area: { from: 30, to: 90 },
+  #   building_year: { from: 2010, to: 2024 },
+  #   rooms_count: 3,
+  #   realty_type: ["dacha"],
+  #   floor: { from: 3, to: 10 },
+  #   facility_ids: [1, 3, 7]
+  # }
+  def initialize(realty_params)
+    @realty_params = realty_params
   end
 
   def call
-    ids = params[:facilities]&.map { |facility| facility[:id] }
+    scope = Realty.includes(:facilities)
 
-    scope = Realty.all
-    scope = scope.joins(:facilities).where(facilities: { id: ids }) if ids.present?
+    scope = filter_by_area(scope)
+    scope = filter_by_floor(scope)
+    scope = filter_by_building_year(scope)
+    scope = filter_by_rooms_count(scope)
+    scope = filter_by_realty_type(scope)
+    filter_by_facility_ids(scope)
+  end
 
-    scope = scope.where("area", { from: realty_attrs[:area], to: realty_attrs[:area] }) if realty_attrs[:area].present? #эксперимент
-    scope = scope.where("floor > ?", realty_attrs[:floor]) if realty_attrs[:floor].present?
-    scope = scope.where("building_year > ?", realty_attrs[:building_year]) if realty_attrs[:building_year].present?
-    scope = scope.where("rooms_count = ?", realty_attrs[:rooms_count]) if realty_attrs[:rooms_count].present? #тут вроде правильно. прилетит конкретное значение
-    scope = scope.where("realty_type = ?", realty_attrs[:realty_type]) if realty_attrs[:realty_type].present?
+  private
 
-    scope
+  def filter_by_area(scope)
+    return scope if realty_params[:area].blank?
+
+    scope.where(area: realty_params.dig(:area, :from)..realty_params.dig(:area, :to))
+  end
+
+  def filter_by_floor(scope)
+    return scope if realty_params[:floor].blank?
+
+    scope.where(floor: realty_params.dig(:floor, :from)..realty_params.dig(:floor, :to))
+  end
+
+  def filter_by_building_year(scope)
+    return scope if realty_params[:building_year].blank?
+
+    scope.where(building_year: realty_params.dig(:building_year, :from)..realty_params.dig(:building_year, :to))
+  end
+
+  def filter_by_rooms_count(scope)
+    return scope if realty_params[:rooms_count].blank?
+
+    scope.where(rooms_count: realty_params[:rooms_count])
+  end
+
+  def filter_by_realty_type(scope)
+    return scope if realty_params[:realty_type].blank?
+
+    scope.where(realty_type: realty_params[:realty_type])
+  end
+
+  def filter_by_facility_ids(scope)
+    return scope if realty_params[:facility_ids].blank?
+
+    scope.where(facility_ids: { id: realty_params[:facility_ids] })
   end
 end
-
