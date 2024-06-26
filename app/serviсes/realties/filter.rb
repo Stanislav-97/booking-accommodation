@@ -59,6 +59,6 @@ class Realties::Filter
   def filter_by_facility_ids(scope)
     return scope if realty_params[:facility_ids].blank?
 
-    scope.where(facility_ids: { id: realty_params[:facility_ids] })
+    scope.where(facilities: { id: realty_params[:facility_ids] })
   end
 end
