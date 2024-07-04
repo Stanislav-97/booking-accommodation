@@ -9,6 +9,7 @@ class Realties::Filter
   #   floor: { from: 3, to: 10 },
   #   facility_ids: [1, 3, 7]
   # }
+
   def initialize(realty_params)
     @realty_params = realty_params
   end
