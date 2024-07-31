@@ -4,6 +4,8 @@ RSpec.describe User, type: :model do
   subject(:instance) { build(:user) }
 
   describe "relations" do
+    it { is_expected.to belong_to(:organization).optional }
+    it { is_expected.to have_one(:auth_token) }
     it { is_expected.to have_many(:users_realties) }
     it { is_expected.to have_many(:realties).through(:users_realties) }
   end
