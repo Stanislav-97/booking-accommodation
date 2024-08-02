@@ -25,7 +25,8 @@ RSpec.describe AuthTokens::Creator, type: :service do
 
     it "token update" do
       service_call
-      expect(AuthToken.last).not_to eq(auth_token.token)
+      user.reload
+      expect(user.auth_token.token).not_to eq(auth_token.token)
     end
   end
 end
