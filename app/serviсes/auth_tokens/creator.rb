@@ -11,6 +11,7 @@ class AuthTokens::Creator
     user.auth_token.delete if user.auth_token.present?
 
     create_token
+    user.auth_token
   end
 
   def create_token

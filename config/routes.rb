@@ -4,7 +4,7 @@ Rails.application.routes.draw do
   namespace :api do
     namespace :v1 do
       resources :realties, only: %i[index show] do
-        resources :bookings, only: %i[create]
+        resources :bookings, only: %i[create], controller: "realties/bookings"
       end
       namespace :manage do
         resources :realties, only: %i[index show create update destroy] do

@@ -1,24 +1,34 @@
 class Api::V1::Realties::BookingsController < ApplicationController
-  skip_before_action :authenticate_user
-
   def create
-    # TODO: check user is authenticated and skip user creation
-    # TODO: wrap to transaction https://api.rubyonrails.org/classes/ActiveRecord/Transactions/ClassMethods.html
-    user = sign_up_user!
-    create_booking!
+    if current_user.present?
+      create_booking!(current_user)
+    else
+      user = User.transaction do
+        user = sign_up_user!
+        create_booking!(user)
+        user
+      end
+      log_in_user!(user)
+    end
 
-    log_in_user!(user)
     head :ok
   end
 
   private
 
+  def authenticate_user
+    auth_token = AuthToken.find_by(token: request.headers[:token])
+    return unless auth_token.present?
+
+    @current_user = auth_token.user
+  end
+
   def realty
     @realty ||= Realty.find(params[:realty_id])
   end
 
-  def create_booking!
-    Bookings::Creator.new(realty, booking_attrs).call
+  def create_booking!(user)
+    Bookings::Creator.new(realty, user, booking_params).call
   end
 
   def sign_up_user!
@@ -51,18 +61,8 @@ class Api::V1::Realties::BookingsController < ApplicationController
   #     }
   #   }
 
-  def booking_attrs
-    fio = "#{user_params[:first_name]} #{user_params[:last_name]}"
-
-    booking_params.to_h.merge(
-      fio:,
-      email: user_params[:email],
-      phone: user_params[:phone]
-    )
-  end
-
   def booking_params
-    params.require(:booking).permit(:date_from, :date_to)
+    params.require(:booking).permit(:date_from, :date_to, :paid_amount)
   end
 
   def user_params

@@ -1,16 +1,25 @@
 class Bookings::Creator
-  attr_reader :realty, :booking_attrs
+  attr_reader :realty, :user, :booking_attrs
 
-  def initialize(realty, booking_attrs)
-    @realty = realty
+  def initialize(realty, user, booking_attrs)
+    @realty        = realty
+    @user          = user
     @booking_attrs = booking_attrs
   end
 
   def call
-    realty.bookings.create!(**booking_attrs.to_h, amount:)
+    realty.bookings.create!(**booking_attrs.to_h, **user_attrs, amount:)
   end
 
   private
+
+  def user_attrs
+    {
+      fio: "#{user.first_name} #{user.last_name}",
+      email: user.email,
+      phone: user.phone
+    }
+  end
 
   def amount
     date_from = booking_attrs[:date_from].to_date
