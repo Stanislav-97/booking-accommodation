@@ -10,9 +10,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_02_22_150826) do
+ActiveRecord::Schema[7.1].define(version: 2024_07_16_160440) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "auth_tokens", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.string "token", null: false
+    t.datetime "expires_at", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_auth_tokens_on_user_id"
+  end
 
   create_table "bookings", force: :cascade do |t|
     t.bigint "realty_id", null: false
@@ -105,7 +114,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_02_22_150826) do
   end
 
   create_table "users", force: :cascade do |t|
-    t.bigint "organization_id", null: false
+    t.bigint "organization_id"
     t.string "first_name", null: false
     t.string "last_name", null: false
     t.boolean "organization_admin", null: false
@@ -124,5 +133,5 @@ ActiveRecord::Schema[7.1].define(version: 2024_02_22_150826) do
     t.index ["realty_id"], name: "index_users_realties_on_realty_id"
     t.index ["user_id"], name: "index_users_realties_on_user_id"
   end
-  
+
 end

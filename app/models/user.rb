@@ -1,6 +1,7 @@
 class User < ApplicationRecord
-  belongs_to :organization
+  belongs_to :organization, optional: true
 
+  has_one :auth_token
   has_many :users_realties
   has_many :realties, through: :users_realties
 

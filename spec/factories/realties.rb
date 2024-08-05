@@ -3,7 +3,7 @@ FactoryBot.define do
     organization
 
     building_year { Faker::Number.between(from: 2000, to: 2024) }
-    description { Faker::String.random }
+    description { Faker::Lorem.sentence }
     floor { Faker::Number.between(from: 1, to: 10) }
     area { Faker::Number.number(digits: 2) }
     rooms_count { Faker::Number.between(from: 1, to: 4) }
