@@ -10,6 +10,7 @@ class Realty < ApplicationRecord
   enum realty_type: REALTY_TYPES.zip(REALTY_TYPES).to_h
 
   belongs_to :organization
+  belongs_to :city
 
   has_many :users_realties
   has_many :users, through: :users_realties

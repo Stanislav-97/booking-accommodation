@@ -1,5 +1,6 @@
 FactoryBot.define do
   factory :realty do
+    city
     organization
 
     building_year { Faker::Number.between(from: 2000, to: 2024) }
